@@ -171,23 +171,26 @@ def abrirArchivoTxt():
 
 
 def indexarArchivos():
-    cantidadDocumentos=10000000
+    cantidadDocumentos=22000000
     print("Entro a indexar")
-    folder_selected = filedialog.askdirectory()
-    ficheros = ficherosEnDir(folder_selected)
+    #folder_selected = filedialog.askdirectory()
+    #ficheros = ficherosEnDir(folder_selected)
     print("Termino de sacar los files de los reviews")
     # locate = filedialog.askdirectory()
     cont = 0
-    for x in ficheros:
-        path = folder_selected+"/"+str(x)+".txt"
-        sacarTF(x, cont)
-        cont = cont + 1
+    while cont<cantidadDocumentos:
+        path = "C:/Users/Armando/Documents/Primer Semestre 2018/Analisis/Progra#3/Datos/Reviews/"+str(cont)+".txt"
+        sacarTF(path, cont)
+        cont= cont+1
+    #for x in ficheros:
+     #   sacarTF(x, cont)
+      #  cont = cont + 1
     print("Termino de sacar TF")
     file_path="C:/Users/Armando/Documents/Primer Semestre 2018/Analisis/Progra#3/Datos/Diccionario/"
     print("Saco los files de los diccionarios")
     goal_path="C:/Users/Armando/Documents/Primer Semestre 2018/Analisis/Progra#3/Datos/TF-IDF"
     diccionario=ficherosEnDir(file_path)
-    total_files=10000000
+    total_files=22000000
     for x in diccionario:
         calculateIDF(x, goal_path, total_files)
     print("Termino de sacar los TFIDF")
@@ -358,13 +361,13 @@ def calculateIDF(file_path, goal_path,total_files):
             tf = float(temporal_tf)
             tf_idf = tf * -math.log((count + 1) / total_files)
             if os.path.exists(goal_path+"/"+file_name+".txt"):
-                overwrite_file = open(goal_path+"/"+file_name+".txt","a")
+                overwrite_file = open(goal_path+"/"+file_name+".txt", "a")
                 overwrite_file.write("\n"+palabra+","+str(tf_idf))
                 overwrite_file.close()
             else:
                 write_file = open(goal_path + "/" + file_name + ".txt", "a")
                 write_file.write(temporal_list[2])
-                write_file.write(palabra+","+str(tf_idf))
+                write_file.write("\n"+palabra+","+str(tf_idf))
                 write_file.close()
     file.close()
 
@@ -376,7 +379,7 @@ def ventanaPrincipal():
     ventana.resizable(FALSE, FALSE)
     #ventana.geometry("1200x600+250+100")
     ventana.config(bg="white")
-    ventana.attributes("-fullscreen", True)
+    #ventana.attributes("-fullscreen", True)
 
     # --------------------------Imagenes---------------------------------
     imagen1 = PhotoImage(file="C:/Users/Armando/Documents/Primer Semestre 2018/Analisis/Progra#3/Imagenes/Google1.png")
@@ -392,7 +395,6 @@ def ventanaPrincipal():
     menubarra.add_command(label="Administrador", command=administrador)
     menubarra.add_command(label="Salir", command=ventana.destroy)
     ventana.config(menu=menubarra)
-
 
     # --------------------------Etiquetas---------------------------------
     lista=[imagen1,imagen2,imagen3,imagen4,imagen5,imagen6,imagen7,imagen8]

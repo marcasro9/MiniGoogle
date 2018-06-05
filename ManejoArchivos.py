@@ -30,7 +30,7 @@ def jsonToTxt(json_filename, goal_path):
                 file.write(filebody)
                 file.close()
                 path = goal_path
+                count += 1
             else:
                 count += 1
-                break
     json_file.close()
